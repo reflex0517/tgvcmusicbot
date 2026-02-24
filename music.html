@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VC Group Music Bot | Premium Telegram VC Bot</title>
+
+<meta name="description" content="VC Group Music Bot is a powerful Telegram Music Bot that plays music and HD videos in Telegram Voice Chat. No ads, no promotions, 99.9% uptime and smooth streaming experience.">
+<meta name="keywords" content="Telegram Music Bot, Telegram VC Bot, Group Voice Chat Music Bot, Play Music in Telegram VC, Play Video in Telegram VC, No Ads Telegram Bot, Promotion Free Music Bot, Telegram Video Player Bot, VC Group Music Bot">
+<meta name="author" content="VC Group Music Bot">
+<meta property="og:title" content="VC Group Music Bot - Telegram Music & Video Bot">
+<meta property="og:description" content="Play music and videos in Telegram Voice Chat with no ads and no promotions. Fast, stable and 99.9% uptime guaranteed.">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://i.ibb.co/xqnSXVMW/Screenshot-20260224-123523.jpg">
+<link rel="preload" as="image" href="https://i.ibb.co/Qjn4Rp2F/Screenshot-20260224-123637.jpg">
+<link rel="preload" as="image" href="https://i.ibb.co/nNVRPxnR/Screenshot-20260224-124214.jpg">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(-45deg,#0f2027,#1f1c2c,#302b63,#24243e);
+background-size:400% 400%;
+animation:gradient 16s ease-in-out infinite;
+color:white;
+overflow-x:hidden;
+position:relative;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.hero,.features,.slider-section,footer{
+position:relative;
+z-index:1;
+}
+
+body::before{
+content:"";
+position:fixed;
+left:0;top:0;right:0;bottom:0;
+background:
+radial-gradient(600px 400px at 20% 25%, rgba(0,242,255,0.18), transparent 60%),
+radial-gradient(600px 400px at 80% 75%, rgba(255,0,200,0.16), transparent 60%),
+radial-gradient(400px 300px at 70% 20%, rgba(255,255,255,0.06), transparent 60%);
+filter:blur(40px);
+opacity:0.6;
+transform:translate3d(0,0,0);
+animation:aurora 24s ease-in-out infinite alternate;
+pointer-events:none;
+z-index:0;
+}
+
+body::after{
+content:"";
+position:fixed;
+left:0;top:0;right:0;bottom:0;
+background:
+radial-gradient(circle at 50% 50%, rgba(0,0,0,0.35), transparent 60%),
+repeating-linear-gradient( to bottom, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 10px),
+repeating-linear-gradient( to right, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 10px);
+mix-blend-mode:soft-light;
+opacity:0.12;
+pointer-events:none;
+z-index:0;
+}
+
+@keyframes aurora{
+0%{transform:translate3d(-20px,-10px,0) scale(1)}
+50%{transform:translate3d(20px,10px,0) scale(1.04)}
+100%{transform:translate3d(-10px,20px,0) scale(1.02)}
+}
+/* HERO SECTION */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:48px;
+background:linear-gradient(90deg,#00f2ff,#ff00c8);
+-webkit-background-clip:text;
+color:transparent;
+text-shadow:0 0 30px rgba(0,255,255,0.6);
+background-size:200% auto;
+animation:titleShimmer 6s ease-in-out infinite;
+}
+
+.hero p{
+margin-top:20px;
+max-width:700px;
+opacity:0.85;
+font-size:18px;
+}
+
+.hero-ticker{
+margin-top:10px;
+height:32px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.ticker-text{
+display:inline-block;
+font-size:18px;
+font-weight:500;
+background:linear-gradient(90deg,#00f2ff,#ff00c8);
+-webkit-background-clip:text;
+color:transparent;
+opacity:0;
+transform:translateY(6px);
+transition:opacity 1000ms ease,transform 1000ms ease;
+will-change:opacity,transform;
+text-shadow:0 0 20px rgba(0,255,255,0.35);
+}
+
+.ticker-in{
+opacity:1;
+transform:translateY(0);
+}
+
+.ticker-out{
+opacity:0;
+transform:translateY(-6px);
+}
+.reveal{
+opacity:0;
+transform:translateY(16px);
+}
+
+.show{
+opacity:1;
+transform:none;
+transition:transform 800ms cubic-bezier(0.2,0.8,0.2,1),opacity 800ms ease;
+}
+
+.buttons{
+margin-top:35px;
+}
+
+.btn{
+padding:15px 45px;
+border:none;
+border-radius:50px;
+font-size:16px;
+cursor:pointer;
+background:linear-gradient(45deg,#00f2ff,#ff00c8);
+color:white;
+transition:0.3s;
+box-shadow:0 0 25px #00f2ff;
+margin:10px;
+position:relative;
+overflow:hidden;
+}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 45px #ff00c8;
+}
+
+.btn::after{
+content:"";
+position:absolute;
+top:0;
+left:-150%;
+width:50%;
+height:100%;
+background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,0.35),rgba(255,255,255,0));
+transform:skewX(-20deg);
+transition:left 0.8s ease;
+}
+
+.btn:hover::after{
+left:150%;
+}
+
+.btn-outline{
+background:transparent;
+border:2px solid #00f2ff;
+box-shadow:none;
+}
+
+/* FEATURES */
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:80px 10%;
+text-align:center;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(15px);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,0.1);
+}
+
+/* SLIDER */
+.slider-section{
+padding:100px 0;
+text-align:center;
+}
+
+.slider-container{
+overflow:hidden;
+width:100%;
+}
+
+.slider{
+position:relative;
+height:var(--height, 420px);
+}
+
+.slide{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+transition:transform 1000ms cubic-bezier(0.25,0.8,0.25,1),opacity 400ms ease;
+}
+
+.slide img{
+width:320px;
+border-radius:20px;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+transition:transform 0.3s ease;
+will-change:transform;
+display:block;
+}
+
+.slide img:hover{
+transform:rotate(1deg) scale(1.03);
+}
+
+.slide h3{
+margin-top:20px;
+}
+
+.slide p{
+opacity:0.8;
+max-width:500px;
+margin-top:10px;
+}
+
+/* positioning states */
+.pos-center{
+transform:translate(-50%,-50%) scale(1);
+opacity:1;
+z-index:3;
+}
+.pos-left{
+transform:translate(calc(-50% - var(--offset, 360px)), -50%) scale(0.92);
+opacity:0.8;
+z-index:2;
+}
+.pos-right{
+transform:translate(calc(-50% + var(--offset, 360px)), -50%) scale(0.92);
+opacity:0.8;
+z-index:2;
+}
+.slide h3,.slide p{opacity:0;transition:opacity 400ms ease}
+.pos-center h3,.pos-center p{opacity:1}
+/* removed CSS keyframes in favor of JS for seamless loop */
+
+.equalizer{
+display:flex;
+gap:8px;
+margin-top:16px;
+height:40px;
+align-items:flex-end;
+}
+
+.equalizer span{
+width:6px;
+border-radius:4px;
+background:linear-gradient(180deg,#ff00c8,#00f2ff);
+display:inline-block;
+transform-origin:bottom;
+animation:equalize 1.2s ease-in-out infinite;
+}
+
+.equalizer span:nth-child(1){animation-delay:0s}
+.equalizer span:nth-child(2){animation-delay:0.15s}
+.equalizer span:nth-child(3){animation-delay:0.3s}
+.equalizer span:nth-child(4){animation-delay:0.45s}
+.equalizer span:nth-child(5){animation-delay:0.6s}
+.equalizer span:nth-child(6){animation-delay:0.75s}
+
+@keyframes equalize{
+0%,100%{transform:scaleY(0.3)}
+50%{transform:scaleY(1)}
+}
+
+@keyframes titleShimmer{
+0%{background-position:0% 50%;text-shadow:0 0 20px rgba(0,255,255,0.5)}
+50%{background-position:100% 50%;text-shadow:0 0 40px rgba(255,0,200,0.7)}
+100%{background-position:0% 50%;text-shadow:0 0 20px rgba(0,255,255,0.5)}
+}
+/* FOOTER */
+footer{
+text-align:center;
+padding:40px;
+opacity:0.6;
+font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<h1 class="reveal">VC Group Music Bot</h1>
+<p class="reveal">Play Music & Videos in Telegram Voice Chat. No Ads. Promotion Free. 99.9% Uptime. Ultra Smooth Streaming Experience.</p>
+<div class="hero-ticker reveal"><span class="ticker-text"></span></div>
+<div class="equalizer">
+<span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="buttons reveal">
+<a href="https://t.me/VcGroupMusic_Bot" target="_blank">
+<button class="btn">🚀 Start Using Bot</button>
+</a>
+
+<a href="#preview">
+<button class="btn btn-outline">👀 See UI</button>
+</a>
+</div>
+</section>
+
+<section class="features">
+<div class="card reveal">
+<h2>🎵 Music Streaming</h2>
+<p>High quality music playback inside Telegram group voice chats.</p>
+</div>
+
+<div class="card reveal">
+<h2>🎬 Video Support</h2>
+<p>Seamless HD video streaming directly in VC.</p>
+</div>
+
+<div class="card reveal">
+<h2>⚡ Fast Response</h2>
+<p>Quick command execution with smooth performance.</p>
+</div>
+
+<div class="card reveal">
+<h2>🚫 No Ads</h2>
+<p>Clean and promotion-free listening experience.</p>
+</div>
+</section>
+
+<section id="preview" class="slider-section">
+<h2 class="reveal">Bot UI Preview</h2>
+
+<div class="slider-container">
+<div class="slider">
+
+<div class="slide">
+<img src="https://i.ibb.co/xqnSXVMW/Screenshot-20260224-123523.jpg" loading="eager">
+<h3>Clean Start Interface</h3>
+<p>Modern welcome UI with smooth command layout.</p>
+</div>
+
+<div class="slide">
+<img src="https://i.ibb.co/Qjn4Rp2F/Screenshot-20260224-123637.jpg" loading="lazy">
+<h3>Music Player UI</h3>
+<p>Interactive player with track info and playback controls.</p>
+</div>
+
+<div class="slide">
+<img src="https://i.ibb.co/nNVRPxnR/Screenshot-20260224-124214.jpg" loading="lazy">
+<h3>Smooth Video Play</h3>
+<p>HD video streaming inside Telegram voice chat.</p>
+</div>
+
+</div>
+</div>
+
+</section>
+
+<section style="display:none;" aria-hidden="true">
+ Telegram VC Music Bot 
+ Telegram Music Bot for Group 
+ Telegram Group Music Bot 
+ Telegram Music Bot 
+ Telegram Group VC Bot 
+ Telegram Group VC Music Bot 
+ Best Telegram Voice Chat Music Bot 
+ No Ads Telegram Music Bot 
+ Promotion Free Telegram VC Bot 
+ </section>
+
+<footer>
+© 2026 VC Group Music Bot | 99.9% Uptime | No Ads
+</footer>
+
+</body>
+<script>
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('show');}});},{threshold:0.2});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const tickerEl=document.querySelector('.ticker-text');
+const phrases=[
+"Crystal clear sound. Zero lag. Pure vibes.",
+"HD video playback, seamlessly inside Voice Chat.",
+"Lightning-fast commands. Instant execution.",
+"No interruptions. Just entertainment.",
+"No promotions. Your group stays clean and clutter-free.",
+"Always online. Always ready."
+];
+let tIdx=0,timerTicker=null,pausedTicker=false;
+function tickerClear(){ if(timerTicker){ clearTimeout(timerTicker); timerTicker=null; } }
+function tickerShow(){
+  tickerEl.classList.remove('ticker-in','ticker-out');
+  tickerEl.textContent=phrases[tIdx];
+  void tickerEl.offsetHeight;
+  tickerEl.classList.add('ticker-in');
+  tickerClear();
+  timerTicker=setTimeout(()=>tickerHold(),1000);
+}
+function tickerHold(){
+  tickerClear();
+  timerTicker=setTimeout(()=>tickerHide(),1000);
+}
+function tickerHide(){
+  tickerEl.classList.add('ticker-out');
+  tickerClear();
+  timerTicker=setTimeout(()=>{
+    tIdx=(tIdx+1)%phrases.length;
+    tickerShow();
+  },1000);
+}
+if(tickerEl){ tickerShow(); }
+
+const slider=document.querySelector('.slider');
+const sliderContainer=document.querySelector('.slider-container');
+const slides=Array.from(document.querySelectorAll('.slider .slide'));
+let index=0;
+let transitionMs=700;
+let dwellMs=1000;
+let paused=false, timerId=null;
+let offsetPx=360;
+
+function clearTimers(){ if(timerId){ clearTimeout(timerId); timerId=null; } }
+
+function layout(overshoot){
+  slides.forEach(s=>{
+    s.classList.remove('pos-left','pos-center','pos-right');
+    s.style.transform='';
+  });
+  const total=slides.length;
+  const prev=(index-1+total)%total;
+  const next=(index+1)%total;
+  slides[prev].classList.add('pos-left');
+  slides[index].classList.add('pos-center');
+  slides[next].classList.add('pos-right');
+  slider.style.setProperty('--offset', offsetPx + 'px');
+  if(overshoot){
+    const center=slides[index];
+    center.style.transform='translate(calc(-50% - 16px), -50%) scale(1)';
+    setTimeout(()=>{ center.style.transform=''; }, 180);
+  }
+}
+
+function scheduleNext(){
+  if(paused) return;
+  clearTimers();
+  timerId=setTimeout(()=>advance(), dwellMs);
+}
+
+function advance(){
+  index=(index+1)%slides.length;
+  measure();
+  layout(true);
+  clearTimers();
+  timerId=setTimeout(()=>scheduleNext(), transitionMs);
+}
+
+function measure(){
+  const centerSlide=slides[index];
+  const img=centerSlide.querySelector('img');
+  const h3=centerSlide.querySelector('h3');
+  const p=centerSlide.querySelector('p');
+  const imgRect=img ? img.getBoundingClientRect() : {width:320,height:240};
+  const h3Rect=h3 ? h3.getBoundingClientRect() : {height:0};
+  const pRect=p ? p.getBoundingClientRect() : {height:0};
+  offsetPx=Math.min(imgRect.width + 120, Math.max(340, window.innerWidth * 0.42));
+  const height=Math.round(imgRect.height + h3Rect.height + pRect.height + 80);
+  slider.style.setProperty('--height', height + 'px');
+  slider.style.setProperty('--offset', offsetPx + 'px');
+}
+
+function start(){ measure(); layout(false); scheduleNext(); }
+const firstImg=document.querySelector('.slider .slide img');
+if(firstImg){
+  if(firstImg.complete){ start(); }
+  else { firstImg.addEventListener('load',start,{once:true}); setTimeout(start,2000); }
+}else{ start(); }
+
+// re-measure when any slide image loads
+slides.forEach((s,i)=>{
+  const im=s.querySelector('img');
+  if(im){
+    im.addEventListener('load',()=>{
+      if(i===index){ measure(); layout(false); }
+    });
+  }
+});
+
+sliderContainer.addEventListener('mouseenter',()=>{ paused=true; clearTimers(); });
+sliderContainer.addEventListener('mouseleave',()=>{ paused=false; scheduleNext(); });
+window.addEventListener('resize',()=>{ measure(); layout(false); });
+</script>
+</html>
